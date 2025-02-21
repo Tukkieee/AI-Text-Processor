@@ -105,7 +105,7 @@ export const Summarizer = ({messages, selectedMessageId, setmessageContent, sets
       aria-modal="true"
       aria-labelledby="summary-options-title"
     >
-    <div className="bg-gray-900 p-6 rounded-xl border border-indigo-500/20 w-96">
+    <div className="bg-gray-900/50 p-6 rounded-xl border border-indigo-500/20 w-96">
       <h3 id="summary-options-title" className="text-xl text-white mb-4">Summary Options</h3>
       
       <div className="space-y-4">

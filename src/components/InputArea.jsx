@@ -159,7 +159,7 @@ export const InputArea = ({ setMessages, setmessageContent, supportedLanguages, 
   }, [text]);
 
   return (
-    <div className="relative flex flex-col gap-3">
+    <div className="relative  w-full flex flex-col gap-3">
           <textarea 
             value={text}
             onChange={(e) => {

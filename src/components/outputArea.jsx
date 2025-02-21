@@ -1,9 +1,9 @@
 // "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import {ActionButtons} from "./actionButtons";
+import { ActionButtons } from "./actionButtons";
 import Markdown from "react-markdown";
-import {Summarizer} from "./summary";
+import { Summarizer } from "./summary";
 import { ImSpinner6 } from "react-icons/im";
 
 export const OutputArea = ({
@@ -49,11 +49,9 @@ export const OutputArea = ({
 
   return (
     <>
-      
-
       <div
         ref={chatOutputRef}
-        className="flex-1 bg-gray-900/30 backdrop-blur-lg rounded-lg p-6 mb-6 overflow-y-auto border border-green-500/30 border-2  max-h-[500px]"
+        className="flex-1  p-6 mb-6 overflow-y-auto  max-h-[550px]"
         aria-label="Message history"
         role="log"
       >
@@ -61,39 +59,42 @@ export const OutputArea = ({
           {messages.length > 0 ? (
             messages.map((msg) => (
               <div
-                key={msg.id} 
-                className="relative group"
+                key={msg.id}
+                className="relative group flex flex-col items-end"
                 aria-label={`Message ${msg.id}`}
               >
-                <div className="p-6 rounded-xl bg-green-700/40 border border-green-500/20 shadow-lg hover:shadow-green-500/10">
+                <div className="p-6 rounded-xl bg-green-700/40 border border-green-500/20 shadow-lg hover:shadow-green-500/10 max-w-[75%] self-end">
                   {/* Message Text Section */}
                   <p className="text-gray-100 leading-relaxed" role="textbox" aria-label="Message content">
                     {msg.text}
                   </p>
 
                   {/* Message Actions Section */}
-                    <ActionButtons 
-                      messages={messages}
-                      messageContent={messageContent}
-                      setmessageContent={setmessageContent}
-                      supportedLanguages={supportedLanguages}
-                      msg={msg}
-                      setSelectedMessageId={setSelectedMessageId}
-                      setshowModal={setshowModal}
-                    />
+                  <ActionButtons
+                    messages={messages}
+                    messageContent={messageContent}
+                    setmessageContent={setmessageContent}
+                    supportedLanguages={supportedLanguages}
+                    msg={msg}
+                    setSelectedMessageId={setSelectedMessageId}
+                    setshowModal={setshowModal}
+                  />
+                </div>
 
+                {/* Action Results Section */}
+                <div className="self-start max-w-[75%]">
                   {/* Translation Section */}
                   {messageContent[msg.id]?.isTranslating ? (
-                   <div 
-                   className="mt-4 p-4 rounded-lg bg-gray-800/50 border border-green-500/20 flex justify-center items-center"
-                   role="status"
-                   aria-live="polite"
-                 >
-                   <ImSpinner6 className="animate-spin text-white text-2xl" />
-                 </div>                 
+                    <div 
+                      className="mt-2 p-4 rounded-lg bg-gray-800/50 border border-green-500/20 flex justify-center items-center"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <ImSpinner6 className="animate-spin text-white text-2xl" />
+                    </div>
                   ) : messageContent[msg.id]?.translationError ? (
                     <div 
-                      className="mt-4 p-4 rounded-lg bg-red-900/20 border border-red-500/20"
+                      className="mt-2 p-4 rounded-lg bg-red-900/20 border border-red-500/20"
                       role="alert"
                       aria-atomic="true"
                     >
@@ -104,12 +105,12 @@ export const OutputArea = ({
                   ) : (
                     messageContent[msg.id]?.translatedText && (
                       <div 
-                        className="mt-4 p-3 rounded-lg bg-gray-800/50 border border-green-500/20"
+                        className="mt-2 p-3 rounded-lg bg-gray-800/50 border border-green-500/20"
                         role="region"
                         aria-label="Translation result"
                       >
                         <p 
-                          className="text-white p-1 bg-blue-500/30 rounded-lg w-fit text-xs mb-4 border border-blue-400/20"
+                          className="text-white p-1  rounded-lg w-fit text-xs mb-2 "
                           aria-label="Translated to"
                         >
                           {
@@ -129,17 +130,16 @@ export const OutputArea = ({
 
                   {/* Summary Section */}
                   {messageContent[msg.id]?.isSummarizing ? (
-                 <div 
-                 className="mt-4 p-4 rounded-lg bg-gray-800/50 border border-green-500/20 flex justify-center items-center"
-                 role="status"
-                 aria-live="polite"
-               >
-                 <ImSpinner6 className="animate-spin text-white text-2xl" />
-               </div>
-               
+                    <div 
+                      className="mt-2 p-4 rounded-lg bg-gray-800/50 border border-green-500/20 flex justify-center items-center"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      <ImSpinner6 className="animate-spin text-white text-2xl" />
+                    </div>
                   ) : messageContent[msg.id]?.summaryError ? (
                     <div 
-                      className="mt-4 p-4 rounded-lg bg-red-900/20 border border-red-500/20"
+                      className="mt-2 p-4 rounded-lg bg-red-900/20 border border-red-500/20"
                       role="alert"
                       aria-atomic="true"
                     >
@@ -150,12 +150,12 @@ export const OutputArea = ({
                   ) : (
                     messageContent[msg.id]?.summary && (
                       <div 
-                        className="mt-4 p-3 rounded-lg bg-gray-800/50 border border-green-500/20"
+                        className="mt-2 p-3 rounded-lg bg-gray-800/50 border border-green-500/20"
                         role="region"
                         aria-label="Message summary"
                       >
                         <p 
-                          className="text-white p-1 bg-blue-700/30 rounded-lg w-fit text-xs mb-4 border border-purple-400/20"
+                          className="text-white p-1 bg-blue-700/30 rounded-lg w-fit text-xs mb-2 border border-purple-400/20"
                           aria-hidden="true"
                         >
                           Summary
@@ -170,26 +170,19 @@ export const OutputArea = ({
               </div>
             ))
           ) : (
-            <div 
-              aria-label="Empty message history"
-            >
-              
-            </div>
+            <div aria-label="Empty message history"></div>
           )}
         </div>
       </div>
       {showModal && (
-       <Summarizer
-        messages={messages}
-        selectedMessageId={selectedMessageId}
-        setmessageContent={setmessageContent}
-        setshowModal={setshowModal}
-        messageContent={messageContent}
-       />
+        <Summarizer
+          messages={messages}
+          selectedMessageId={selectedMessageId}
+          setmessageContent={setmessageContent}
+          setshowModal={setshowModal}
+          messageContent={messageContent}
+        />
       )}
     </>
   );
 };
-
-// export default MessageOutput;
-

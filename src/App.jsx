@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import {OutputArea} from "./components/outputArea";
 import './App.css'
 import {InputArea} from "./components/InputArea";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const App = () => {
   const mainRef = useRef(null);
@@ -51,23 +52,12 @@ const App = () => {
 
 
   return (
-    <div ref={mainRef} className="grid grid-rows-[10px_1fr] items-center justify-items-center min-h-screen gap-8 sm:p-1 font-[family-name:var(--font-geist-sans)] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-slate-900 to-black  relative ">
+<div ref={mainRef} className="w-full min-h-screen grid grid-rows-[10px_1fr] items-center justify-items-center gap-8 sm:p-1 font-[family-name:var(--font-geist-sans)] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-900 via-slate-900 to-black relative">
      
       
-      <div className="flex flex-col w-full max-w-4xl row-start-2 h-full">
-        <h1 className="text-4xl md:text-6xl mb-6 text-center bg-gradient-to-r text-white-900   font-roadrage">AI Text Processor</h1>
+<div className="flex flex-col w-full h-full max-w-none row-start-2 px-4">
+        <h1 className="flex justify-center text-4xl md:text-6xl mb-6 text-center bg-gradient-to-r text-white-900   font-roadrage"><TbFidgetSpinner className="animate-spin" style={{ animationDuration: "3s" }}/>AI Text Processor<TbFidgetSpinner className="animate-spin" style={{ animationDuration: "3s" }}/></h1>
         
-        {/* Supported Languages Section */}
-        <div className="mb-6 p-4 rounded-lg bg-gray-900/30 backdrop-blur-lg border border-green-500/20 flex flex-wrap justify-between">
-          <h2 className="text-sm font-medium text-white-300 mb-3">Supported Languages:</h2>
-          <div className="flex flex-wrap gap-2">
-            {supportedLanguages.map((lang) => (
-              <span key={lang.value} className="px-3 py-1 text-xs text-white bg-green-500/20 rounded-full border border-green-400/20">
-                {lang.label}
-              </span>
-            ))}
-          </div>
-        </div>
 
         {/* Messages Output Section */}
         <OutputArea messages={messages} messageContent={messageContent} setmessageContent={setmessageContent} supportedLanguages={supportedLanguages} />

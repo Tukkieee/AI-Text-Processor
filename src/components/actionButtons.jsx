@@ -218,7 +218,7 @@ export const ActionButtons = ({
           {messageContent[msg.id]?.isOpen && (
             <div
               id={`language-dropdown-${msg.id}`}
-              className="language-dropdown fixed z-50 mt-2 w-48 rounded-lg bg-gray-900/95 backdrop-blur-lg border border-blue-400/20 shadow-lg"
+              className="absolute left-0 top-full mt-2 w-48 rounded-lg bg-gray-900/50 backdrop-blur-lg border border-blue-400/20 shadow-lg z-50"
               role="listbox"
               aria-label="Select target language"
             >
